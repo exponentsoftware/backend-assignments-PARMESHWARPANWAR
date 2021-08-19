@@ -2,7 +2,7 @@ import TodoModel from "../model/todo.model.js";
 
 export const createtodo = async (req, res) => {
   const todo = new TodoModel({
-    // _id = req.body.id,
+    _id = new mongoose.Types.ObjectId(),
     username: req.body.username,
     title: req.body.title, 
     taskcompleted: req.body.taskcompleted,
@@ -44,7 +44,7 @@ export const Alltodo = async(req,res) => {
 export const todo = async(req, res) => {
     console.log("YESS")
     console.log(req.params)
-    TodoModel.findOne({_id:req.params.id})
+    TodoModel.findOne({_id:req.params.userId})
     .select(
         "username title  taskcompleted work hobby task"
       )
