@@ -67,18 +67,30 @@ export const byCategory = (req, res) => {
     });
     res.send(filteredCategory);
   } catch (err) {
-    res.json.status(500).json({ message: err.message});
+    res.json.status(500).json({ message: err.message });
     console.log(err);
   }
 };
 
+export const byTitle = (req, res) => {
+  TodoModel.find({ title: req.body.title })
+    .select("name title status category")
+    .exec()
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.send({ message: err.message });
+    });
+};
 
 export const deletetodo = async (req, res) => {
   const { id } = req.params;
-  
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No Todo with id: ${id}`);
-  
-    await TodoModel.findByIdAndRemove(id);
-  
-    res.json({ message: "Todo deleted successfully." });
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send(`No Todo with id: ${id}`);
+
+  await TodoModel.findByIdAndRemove(id);
+
+  res.json({ message: "Todo deleted successfully." });
 };
