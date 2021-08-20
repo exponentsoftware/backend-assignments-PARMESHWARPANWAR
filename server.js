@@ -9,6 +9,7 @@ app.use(cors());
 
 import MONGODB_URI from "./config.js";
 import todosRoutes from "./routes/todo.routes.js";
+import usersRoutes from "./routes/user.routes.js";
 
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
@@ -22,6 +23,7 @@ mongoose.connection.on("connected", () => {
 
 
 app.use("/", todosRoutes);
+app.use('/user', usersRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is working on ${PORT}`);

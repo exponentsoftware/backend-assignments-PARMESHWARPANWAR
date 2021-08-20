@@ -10,7 +10,7 @@ import { createtodo, Alltodo,todo,updatetodo,deletetodo }from '../controllers/to
 router.post('/add', createtodo);
 router.get('/alltodos', Alltodo);
 router.get('/todo/:userId',todo);
-router.put('/update', updatetodo);
+router.patch('/update', updatetodo);
 router.delete('/delete', deletetodo);
 
 export default router;
